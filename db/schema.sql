@@ -8,11 +8,11 @@ CREATE TABLE department (
   name VARCHAR(30) NOT NULL
 );
 
--- Create a "roles" table to store job roles
+-- Create a "role" table to store job roles (changed "roles" to "role" here)
 CREATE TABLE roles (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(30),
-    salary DECIMAL(10, 2), -- Added precision and scale to the DECIMAL data type
+    salary DECIMAL(10, 2),
     department_id INT
 );
 
