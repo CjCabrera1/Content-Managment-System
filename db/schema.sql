@@ -3,7 +3,7 @@ CREATE DATABASE employment_db;
 USE employment_db;
 
 -- Create a "departments" table to store department information
-CREATE TABLE departments (
+CREATE TABLE department (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(30) NOT NULL
 );
@@ -17,7 +17,7 @@ CREATE TABLE roles (
 );
 
 -- Create an "employees" table to store employee information
-CREATE TABLE employees (
+CREATE TABLE employee (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(30),
     last_name VARCHAR(30),
