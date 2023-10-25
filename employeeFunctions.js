@@ -103,7 +103,7 @@ function addRole(con, mainMenu) {
       },
     ])
     .then((answers) => {
-      const query = 'INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)';
+      const query = 'INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)';
       const values = [answers.title, answers.salary, answers.department_id];
 
       con.query(query, values, (err) => {
