@@ -158,56 +158,56 @@ function addEmployee(con, mainMenu) {
 }
 
 function updateEmployeeRole(con, mainMenu) {
-    // First, you might want to fetch a list of employees to allow the user to select the one to update
-    // Use a SELECT query for this
+    // Fetch a list of employees to allow the user to select the one to update
     const query = 'SELECT id, first_name, last_name FROM employee';
     con.query(query, (err, results) => {
-      if (err) {
-        console.error('Error fetching employees: ' + err);
-        return;
-      }
-    });
-      // Create an array of choices for the inquirer prompt
-      const employeeChoices = results.map((employee) => ({
-        name: `${employee.first_name} ${employee.last_name}`,
-        value: employee.id,
-    }));
+        if (err) {
+            console.error('Error fetching employees: ' + err);
+            return;
+        }
 
-    inquirer
-      .prompt([
-        {
-            type: 'list',
-            name: 'employeeId',
-            message: 'Select the employee to update:',
-            choices: employeeChoices,
-        },
-      ])
-      .then((employeeAnswers) => {
-        // prompt the user to enter the new role ID
+        // Create an array of choices for the inquirer prompt
+        const employeeChoices = results.map((employee) => ({
+            name: `${employee.first_name} ${employee.last_name}`,
+            value: employee.id,
+        }));
+
         inquirer
-          .prompt([
-            {
-              type: 'input',
-              name: 'newRoleId',
-              message: 'Enter the new role ID for the employee:',
-            },
-          ])
-          .then((roleAnswers) => {
-            // SQL query to update the employee's role
-            const query = 'UPDATE employee SET role_id = ? WHERE id = ?';
-            const values = [roleAnswers.newRoleId, employeeAnswers.employeeId];
-  
-            con.query(query, values, (err) => {
-              if (err) {
-                console.error('Error updating employee role: ' + err);
-              } else {
-                console.log('Employee role updated successfully!');
-              }
-              mainMenu(); // Return to the main menu
+            .prompt([
+                {
+                    type: 'list',
+                    name: 'employeeId',
+                    message: 'Select the employee to update:',
+                    choices: employeeChoices,
+                },
+            ])
+            .then((employeeAnswers) => {
+                // Prompt the user to enter the new role ID
+                inquirer
+                    .prompt([
+                        {
+                            type: 'input',
+                            name: 'newRoleId',
+                            message: 'Enter the new role ID for the employee:',
+                        },
+                    ])
+                    .then((roleAnswers) => {
+                        // SQL query to update the employee's role
+                        const query = 'UPDATE employee SET role_id = ? WHERE id = ?';
+                        const values = [roleAnswers.newRoleId, employeeAnswers.employeeId];
+
+                        con.query(query, values, (err) => {
+                            if (err) {
+                                console.error('Error updating employee role: ' + err);
+                            } else {
+                                console.log('Employee role updated successfully!');
+                            }
+                            mainMenu(); // Return to the main menu
+                        });
+                    });
             });
-          });
-      });
-  }
+    });
+}
 // Export the functions
 module.exports = {
   viewDepartments,
